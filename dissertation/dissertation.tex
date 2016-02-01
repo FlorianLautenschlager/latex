@@ -1,0 +1,314 @@
+\documentclass[12pt,a4paper,ngerman,twoside,open=right]{scrbook}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Variables for title and organization
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\dissTitle}{Ich bin der Titel der Dissertation}
+\newcommand{\dissAuthor}{Florian Lautenschlager}
+\newcommand{\dissAuthorLocation}{M{\"u}nchen}
+
+\newcommand{\docType}{Dissertation}
+\newcommand{\docKeyWords}{GitHub, Latex, Vorlage}
+
+\newcommand{\dissUni}{Universit{\"a}t}
+\newcommand{\dissFac}{Technischen Fakult{\"a}t}
+\newcommand{\dissPhD}{Dr.-Ing.}
+
+\newcommand{\dissAuditChair}{Prof. Dr.-Ing. habil. XYZ}
+\newcommand{\dissFirstAssessor}{Prof. Dr. A BCD}
+\newcommand{\dissSecondAssessor}{Prof. Dr. E FGH}
+\newcommand{\dissDateofOralExam}{XX.YY.ZZZZ}
+
+\newcommand{\relPathToImages}{images/}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Default Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[
+%PDF Settings
+	pdftex,
+    bookmarks=true,
+    bookmarksopen=false,
+    bookmarksnumbered=true,
+    pdftoolbar=true,
+    pdfmenubar=true,
+    pdfpagelayout=TwoPageRight,
+    pagebackref=true,
+%Document meta information
+    pdfauthor={\dissAuthor},
+    pdftitle={\dissTitle}, 
+    pdfsubject={\docType},
+    pdfkeywords={\docKeyWords},
+%PDF link settings
+    linktoc=all,
+    colorlinks=false,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan,           % color of external link
+    pdfnewwindow=true,
+    ]{hyperref}
+\hypersetup{pageanchor=false}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel} 
+\usepackage{listings}
+\usepackage{graphicx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Relative path to images
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\graphicspath{ {\relPathToImages} }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% To avoid warnings with addcontentsline
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{scrhack} 
+\usepackage{floatrow}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Page layout
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\headheight}{1.1\baselineskip}
+\usepackage[headsepline]{scrpage2}
+\ihead[]{}                      %Header left
+\chead[]{}                      %Header center 
+\ohead[]{\headmark}             %Header right
+\ifoot[]{}                      %Footer left 
+\cfoot[]{}                      %Footer center 
+\ofoot[\pagemark]{\pagemark}    %Footer right 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title Page als Cover missbraucht.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{geometry} %% Remove showframe in your document
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definition box
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{boiboites}
+\usepackage{amsmath}
+
+\newboxedtheorem[boxcolor=black, background=gray!5, titlebackground=gray!20,
+titleboxcolor = black]{definition}{Definition}{anything}
+\newboxedtheorem[boxcolor=black, background=gray!5, titlebackground=gray!20,
+titleboxcolor = black]{introduction}{Begriffsklärung}{anything}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tabbing stuff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{ifthen}
+\usepackage{tabto}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ToDo Stuff, Blindtext - Should be removed when done.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{xargs}                      % Use more than one optional parameter in a new commands
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+\newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\info}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+\usepackage{blindtext}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Title page
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*{\titlePage}{\begingroup
+\newgeometry{margin=35mm}
+\thispagestyle{empty}
+\centering
+\Huge{\textbf{\dissTitle}}\\
+\vspace{40 mm}
+\Large{Der \dissFac\\
+\vspace{5 mm}
+der \dissUni\\
+\vspace{5 mm}
+zur\\
+\vspace{5 mm}
+Erlangung des Doktorgrades \dissPhD}\\
+\vspace{40 mm}
+vorgelegt von \\
+\vspace{5 mm}
+\Large{\textbf{\dissAuthor}}\\
+\vspace{5 mm}
+aus \dissAuthorLocation
+\restoregeometry
+\vspace*{3\baselineskip} 
+\endgroup}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Titlepage
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titlePage
+\thispagestyle{empty}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Diss-orga
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\thispagestyle{empty}
+\NumTabs{2}
+\vspace*{\fill}
+\noindent{Als Dissertation genehmigt\\von der \dissFac\\der \dissUni.}\\\\\\
+\noindent{Tag der mündlichen\\Prüfung \tab{\textbf{\dissDateofOralExam}}\\\\\\
+\noindent{Vorsitzende des\\Promotionsorgans: \tab{\textbf{\dissAuditChair}}}\\\\
+\noindent{Gutachter: \tab{\textbf{\dissFirstAssessor}}}\\
+\noindent{\tab \tab{\textbf{\dissSecondAssessor}}
+\cleardoublepage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Roman numbers
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{roman}
+\setcounter{page}{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Abstract
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\blindtext
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%Acknowledgment
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Danksagung}
+\addcontentsline{toc}{chapter}{Danksagung}
+Danke an alle.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Table of contents
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Intro, start at 1 (arabic)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Einleitung}
+\setcounter{page}{1}
+\pagenumbering{arabic} 
+\pagestyle{scrheadings}
+
+\section{Motivation}
+\blindtext
+\begin{figure}[!b]
+    \centering
+    \includegraphics[width=0.75\textwidth]{sublime}
+    \caption{Eine tolle Bildunterschrift.}
+    \label{fig:chapter-2-continousDiscreteTs}
+\end{figure}
+\section{Überblick des Ansatzes}
+\blindtext
+\begin{definition}[Meine Definition]\label{def:mydefintion}
+Die Menge 
+$Y_i=\{-\infty,1,2,\ldots,n,+\infty\}$
+wird als Menge$_\infty$ bezeichnet.
+\end{definition}
+\blindtext[3]
+\begin{lstlisting}[language=Python, caption=Python Beispiel]
+import numpy as np
+ 
+def incmatrix(genl1,genl2):
+    m = len(genl1)
+    n = len(genl2)
+    M = None #to become the incidence matrix
+    VT = np.zeros((n*m,1), int)  #dummy variable
+ 
+    #compute the bitwise xor matrix
+    M1 = bitxormatrix(genl1)
+    M2 = np.triu(bitxormatrix(genl2),1) 
+ 
+    for i in range(m-1):
+        for j in range(i+1, m):
+            [r,c] = np.where(M2 == M1[i,j])
+            for k in range(len(r)):
+                VT[(i)*n + r[k]] = 1;
+                VT[(i)*n + c[k]] = 1;
+                VT[(j)*n + r[k]] = 1;
+                VT[(j)*n + c[k]] = 1;
+ 
+                if M is None:
+                    M = np.copy(VT)
+                else:
+                    M = np.concatenate((M, VT), 1)
+ 
+                VT = np.zeros((n*m,1), int)
+ 
+    return M
+\end{lstlisting}
+\section{Aufbau des Dokuments}
+\blindtext[3]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Related work
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Verwandte Arbeiten}
+\blindtext
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% First Chapter
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Erstes Kapitel}
+Auf einer neuen Seite (rechts).
+\section{Erster Abschnitt im Kapitel 1}
+Beispiel von Wikibooks~\footnote{https://en.wikibooks.org/wiki/LaTeX/Tables}
+\begin{center}
+\begin{table}[!h]
+  \begin{tabular}{ | l | l | l | p{5cm} |}
+    \hline
+    Day & Min Temp & Max Temp & Summary \\ \hline
+    Monday & 11C & 22C & A clear day with lots of sunshine.  
+    However, the strong breeze will bring down the temperatures. \\ \hline
+    Tuesday & 9C & 19C & Cloudy with rain, across many northern regions. Clear spells 
+    across most of Scotland and Northern Ireland, 
+    but rain reaching the far northwest. \\
+    \hline
+    \end{tabular}
+    \caption{Ich bin eine tolle Tabelle.}
+    \label{tbl:tabelle1}
+  \end{table}
+\end{center}
+In \ref{tbl:tabelle1} sieht man einiges.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Conclusion
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Schluss und zukünftige Arbeiten}
+\section{Schluss}
+\section{Zukünftige Arbeiten}
+
+
+\listoffigures
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+
+\listoftables
+\addcontentsline{toc}{chapter}{Tabellenverzeichnis} 
+
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{Listings}
+
+\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}
+
+\chapter*{Literaturverzeichnis}
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\bibliography{dissertation.bib}
+
+\end{document}

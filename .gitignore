@@ -1,0 +1,8 @@
+*.sty
+*.aux
+*.lof
+*.lol
+*.lot
+*.out
+*.gz
+*.toc
